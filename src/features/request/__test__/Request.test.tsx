@@ -98,11 +98,13 @@ describe("내 문의 페이지 테스트", () => {
       const 삭제버튼 = screen.getAllByText("삭제");
       await userEvent.click(삭제버튼[0]);
       expect(screen.getByText("정말 삭제 하시겠습니까?")).toBeInTheDocument();
-      const 삭제확인버튼 = screen.getByText("확인");
-      await userEvent.click(삭제확인버튼);
-      const 문의명 = screen.getAllByTestId("requests");
-      // 
-      expect(문의명.length - 1).toBe(mockRequestData.length);
+      await userEvent.click(screen.getByText("확인"));
+      // 마지막 문의 삭제
+      await userEvent.click(삭제버튼[1]);
+      expect(screen.getByText("정말 삭제 하시겠습니까?")).toBeInTheDocument();
+      await userEvent.click(screen.getByText("확인"));
+ 
+      expect(mockRequestData.length).toBe(0);
     });
 
     it("문의 수정 버튼 클릭후 value변경", async () => {
