@@ -89,6 +89,7 @@ describe("내 문의 페이지 테스트", () => {
       mockIsLoading = false;
       renderWithRedux(<RequestContainer />);
       const input = screen.getByTestId(`input_${mockData[0].no}`);
+      // 
       expect(input).toHaveValue("");
     });
     it("문의 삭제 테스트", async () => {
